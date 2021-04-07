@@ -34,9 +34,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $employee = User::create([
-            'name' => 'Akashdeep Nandi',
-            'email' => 'akash@gmail.com',
-            'password' => Hash::make('akash')
+            'name' => 'Alif Arigin',
+            'email' => 'arifintripto@gmail.com',
+            'password' => Hash::make('123456789')
         ]);
 
         //
@@ -45,8 +45,8 @@ class UsersTableSeeder extends Seeder
         $admin->roles()->attach($adminRole);
         $employee = Employee::create([
             'user_id' => $employee->id,
-            'first_name' => 'Akashdeep',
-            'last_name' => 'Nandi',
+            'first_name' => 'Alif',
+            'last_name' => 'Arifin',
             'join_date' => $join->format('Y-m-d'),
         ]);
 

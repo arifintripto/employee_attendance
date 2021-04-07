@@ -22,9 +22,11 @@
                 <!-- User image -->
                 <li class="user-header bg-primary">
 
-                <p>
-                    {{ Auth::user()->name }}
-                </p>
+                    @if(isset(Auth::user()->employee->first_name))
+                        <p>{{ Auth::user()->employee->first_name }} {{ Auth::user()->employee->last_name }}</p>
+                    @else
+                        <p>{{ Auth::user()->name }}</p>
+                    @endif
                 </li>
                 <!-- Menu Body -->
                 <li class="user-body text-center">

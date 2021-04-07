@@ -9,24 +9,11 @@
         href="{{ route('employee.index') }}"
     @endcan
     class="brand-link text-center">
-        {{-- <img
-            src="/dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3"
-            style="opacity: 0.8;"
-        /> --}}
         <span class="brand-text font-weight-light ">Emami Bangladesh Limited</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-            </div>
-        </div>
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul
@@ -40,10 +27,7 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                                Admin Dashboard
-
-                        </p>
+                        <p>Admin Dashboard</p>
                     </a>
                 </li>
                 @include('includes.admin.sidebar_items')
@@ -52,10 +36,7 @@
                 <li class="nav-item">
                     <a href="{{ route('employee.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                                Employee Dashboard
-
-                        </p>
+                        <p>Employee Dashboard</p>
                     </a>
                 </li>
                 @include('includes.employee.sidebar_items')

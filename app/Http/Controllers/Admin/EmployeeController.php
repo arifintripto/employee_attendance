@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-use function Ramsey\Uuid\v1;
 
 class EmployeeController extends Controller
 {
@@ -87,7 +86,6 @@ class EmployeeController extends Controller
         // detaches all the roles
         DB::table('leaves')->where('employee_id', '=', $employee_id)->delete();
         DB::table('attendances')->where('employee_id', '=', $employee_id)->delete();
-        DB::table('expenses')->where('employee_id', '=', $employee_id)->delete();
         $employee->delete();
         $user->roles()->detach();
         $user->delete();

@@ -62,55 +62,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="dob">Date of Birth</label>
-                                    <input type="text" name="dob" id="dob" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Gender</label>
-                                    <select name="gender" class="form-control">
-                                        @if ($employee->sex == 'Male')
-                                            <option value="Male" selected>Male</option>
-                                            <option value="Female">Female</option>
-                                        @else
-                                            <option value="Male">Male</option>
-                                            <option value="Female" selected>Female</option>
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="join_date">Join Date</label>
                                     <input type="text" name="join_date" id="join_date" class="form-control">
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="">Designation</label>
-                                        <select name="desg" class="form-control">
-                                            @foreach ($desgs as $desg)
-                                                <option value="{{ $desg }}"
-                                                @if ($desg == $employee->desg)
-                                                    selected
-                                                @endif
-                                                >
-                                                    {{ $desg }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="">Department</label>
-                                        <select name="department_id" class="form-control">
-                                            @foreach ($departments as $department)
-                                                <option value="{{ $department->id }}"
-                                                @if ($department->id == $employee->department_id)
-                                                    selected
-                                                @endif
-                                                >
-                                                    {{ $department->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+
 
 
                             </fieldset>

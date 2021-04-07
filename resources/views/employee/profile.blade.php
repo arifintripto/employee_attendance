@@ -48,26 +48,10 @@
                                 <td>Last Name</td>
                                 <td>{{ $employee->last_name }}</td>
                             </tr>
-                            <tr>
-                                <td>Date of Birth</td>
-                                <td>{{ $employee->dob->format('d M, Y') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>{{ $employee->sex }}</td>
-                            </tr>
 
                             <tr>
                                 <td>Join Date</td>
                                 <td>{{ $employee->join_date->format('d M, Y') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Designation</td>
-                                <td>{{ $employee->desg }}</td>
-                            </tr>
-                            <tr>
-                                <td>Department</td>
-                                <td>{{ $employee->department->name }}</td>
                             </tr>
 
                         </table>
