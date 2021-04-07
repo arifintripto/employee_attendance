@@ -1,8 +1,6 @@
 ## About EAMS
 
-EAMS is a web application used for HRM of employees with robust authentication and access manangement system made in lastest Laravel 7.25 Framework and MySQL.
-
-- [Simple, fast routing engine of laravel is used](https://laravel.com/docs/routing).
+Employee Attendance is a web application used for tracking attendance of employees with robust authentication and access manangement system made in Laravel 7.25 Framework and MySQL.
 
 - Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent) is used for database queries.
 - Efficient usage of laravel [relationships](https://laravel.com/docs/7.x/eloquent-relationships).
