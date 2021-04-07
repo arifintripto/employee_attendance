@@ -4,6 +4,12 @@ Employee Attendance is a web application used for tracking attendance of employe
 
 ### Configuration
 
+Install Composer after Cloning the repository
+
+```console
+composer install
+```
+
 Make sure that this project has proper file permissions.
 To run this project, you will need to set up a database and a smtp server for password reset and add it to your .env file
 
