@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
 
@@ -42,11 +42,11 @@
                         @csrf
                         @method('POST')
                     <div class="card-body">
-                        
+
                             <fieldset>
                                 <div class="form-group">
                                     <label for="">First Name</label>
-                                    <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control">
+                                    <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" autocomplete="off">
                                     @error('first_name')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Last Name</label>
-                                    <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control">
+                                    <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" autocomplete="off">
                                     @error('last_name')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" value="{{ old('email') }}" class="form-control">
+                                    <input type="text" name="email" value="{{ old('email') }}" class="form-control" autocomplete="off">
                                     @error('email')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -72,93 +72,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="dob">Date of Birth</label>
-                                    <input type="text" name="dob" id="dob" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Gender</label>
-                                    <select name="sex" class="form-control">
-                                        <option hidden disabled selected value> -- select an option -- </option>
-                                        @if (old('sex') == 'Male')
-                                        <option value="Male" selected>Male</option>
-                                        <option value="Female">Female</option>
-                                        @elseif (old('sex') == 'Female')
-                                        <option value="Male">Male</option>
-                                        <option value="Female" selected>Female</option>
-                                        @else
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        @endif
-                                    </select>
-                                    @error('sex')
-                                        <div class="text-danger">
-                                            Please select an valid option
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="join_date">Join Date</label>
                                     <input type="text" name="join_date" id="join_date" class="form-control">
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="">Designation</label>
-                                        <select name="desg" class="form-control">
-                                            <option hidden disabled selected value> -- select an option -- </option>
-                                            @foreach ($desgs as $desg)
-                                                <option value="{{ $desg }}"
-                                                @if (old('desg') == $desg)
-                                                    selected
-                                                @endif
-                                                >
-                                                    {{ $desg }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('desg')
-                                        <div class="text-danger">
-                                            Please select an valid option
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="">Department</label>
-                                        <select name="department_id" class="form-control">
-                                            <option hidden disabled selected value> -- select an option -- </option>
-                                            @foreach ($departments as $department)
-                                                <option value="{{ $department->id }}"
-                                                    @if (old('department_id') == $department->id)
-                                                        selected
-                                                    @endif    
-                                                >
-                                                    {{ $department->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('department')
-                                        <div class="text-danger">
-                                            Please select a valid option
-                                        </div>
-                                    @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Salary</label>
-                                    <input type="text" name="salary" value="{{ old('salary') }}" class="form-control">
-                                    @error('salary')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Photo</label>
-                                    <input type="file" name="photo" class="form-control-file">
-                                    @error('photo')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Password</label>
@@ -179,8 +94,8 @@
                                     @enderror
                                 </div>
                             </fieldset>
-                            
-                        
+
+
                     </div>
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-flat btn-primary" style="width: 40%; font-size:1.3rem">Add</button>
@@ -189,7 +104,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- /.container-fluid -->
 </section>
@@ -238,7 +153,7 @@
                 }
             });
         }
-        
+
     });
 </script>
 @endsection

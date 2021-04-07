@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
 
@@ -34,16 +34,8 @@
       <row class="">
         <div class="col-md-8 mx-auto">
           <div class="jumbotron">
-            <h1 class="display-4 text-primary">Welcome to EAMS</h1>
-            <p class="lead">This is employee management application used for handling to the statistics, visualizations and other various tabular work</p>
-            <hr class="my-4">
-            <p>Hope you like it,
-              @if ($employee->sex == 'Male')
-                Mr. {{ $employee->first_name.' '.$employee->last_name }}
-              @else
-                Ms. {{ $employee->first_name.' '.$employee->last_name }}
-              @endif
-            </p>
+            <h1 class="display-4 text-primary">Welcome to Emami Bangladesh Limited</h1>
+            <p class="lead">This is employee management application used for handling to the attendance of the employees.</p>
           </div>
         </div>
       </row>

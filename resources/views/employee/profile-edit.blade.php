@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
 
@@ -41,7 +41,7 @@
                         @csrf
                         @method('PUT')
                     <div class="card-body">
-                        
+
                             <fieldset>
                                 <div class="form-group">
                                     <label for="">First Name</label>
@@ -111,19 +111,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="">Photo</label>
-                                    <input type="file" name="photo" class="form-control-file">
-                                    @error('photo')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                
+
+
                             </fieldset>
-                            
-                        
+
+
                     </div>
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-flat btn-primary" style="width: 40%; font-size:1.3rem">Save</button>
@@ -132,7 +124,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- /.container-fluid -->
 </section>

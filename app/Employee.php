@@ -6,15 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $dates = ['created_at', 'dob','updated_at', 'join_date'];
-    protected $fillable = ['user_id', 'first_name', 'last_name', 'sex', 'dob', 'join_date', 'desg', 'department_id', 'salary', 'photo'];
+    protected $dates = ['created_at', 'updated_at', 'join_date'];
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'join_date'];
     public function user() {
         return $this->belongsTo('App\User');
-    }
-
-    public function department() {
-        // return $this->hasOne('App\Department');
-        return $this->belongsTo('App\Department');
     }
 
     public function attendance() {
@@ -25,7 +20,4 @@ class Employee extends Model
         return $this->hasMany('App\Leave');
     }
 
-    public function expense() {
-        return $this->hasMany('App\Expense');
-    }
 }

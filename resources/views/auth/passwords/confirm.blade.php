@@ -2,7 +2,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="route('login')"><b>EAMS</b></a>
+        <a href="route('login')"><b>Emami Bangladesh Limited</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -51,5 +51,5 @@
         <!-- /.login-card-body -->
     </div>
 </div>
-<!-- /.login-box -->    
+<!-- /.login-box -->
 @endsection

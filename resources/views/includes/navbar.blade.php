@@ -16,34 +16,21 @@
 
         <li class="nav-item dropdown user user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                @if (Auth::user()->employee)
-                <img src="/storage/employee_photos/{{ Auth::user()->employee->photo }}" class="user-image img-circle elevation-2 alt="User Image">
-                @else
-                <img src="/dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2 alt="User Image">
-                @endif
                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                @if (Auth::user()->employee)
-                <img src="/storage/employee_photos/{{ Auth::user()->employee->photo }}" class="img-circle elevation-2" alt="User Image">
-                @else
-                <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                @endif
-        
+
                 <p>
                     {{ Auth::user()->name }}
-                    @if ( Auth::user()->employee )
-                    - {{ Auth::user()->employee->desg }}, {{ Auth::user()->employee->department->name }}
-                    @endif 
                 </p>
                 </li>
                 <!-- Menu Body -->
                 <li class="user-body text-center">
                     @if ( Auth::user()->employee )
                     <small>Member since {{ Auth::user()->employee->join_date->format('d M, Y') }}</small>
-                    @endif 
+                    @endif
                 <!-- /.row -->
                 </li>
                 <!-- Menu Footer-->
@@ -56,7 +43,7 @@
                     @endif
                 </div>
                 <div class="pull-right">
-                    <a href="{{ route('logout') }}" 
+                    <a href="{{ route('logout') }}"
                     class="btn btn-default btn-flat"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"

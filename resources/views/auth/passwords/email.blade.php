@@ -2,7 +2,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="route('login')"><b>EAMS</b></a>
+        <a href="route('login')"><b>Emami Bangladesh Limited</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
@@ -19,9 +19,9 @@
                     <input
                         id="email"
                         type="email"
-                        class="form-control @error('email') is-invalid @enderror" name="email" 
+                        class="form-control @error('email') is-invalid @enderror" name="email"
                         value="{{ old('email') }}" required
-                        placeholder="Email" autocomplete="email"
+                        placeholder="Email" autocomplete="off"
                         autofocus
                     />
                     <div class="input-group-append">
@@ -51,5 +51,5 @@
         <!-- /.login-card-body -->
     </div>
 </div>
-<!-- /.login-box -->    
+<!-- /.login-box -->
 @endsection

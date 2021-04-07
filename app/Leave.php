@@ -13,7 +13,4 @@ class Leave extends Model
         return $this->belongsTo('App\Employee');
     }
 
-    // public function getStartAttribute($date) {
-    //     return Carbon::parse($date);
-    // }
 }

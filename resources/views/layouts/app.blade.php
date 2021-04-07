@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="csrf-token" content="{{ Session::token() }}"> 
-        <title>EAMS | Dashboard</title>
+        <meta name="csrf-token" content="{{ Session::token() }}">
+        <title>Emami Bangladesh Limited</title>
         {{-- favicon --}}
         <link rel="icon" href="/img/partner.png">
         <!-- Tell the browser to be responsive to screen width -->
@@ -22,7 +22,7 @@
         {{-- Font awesome 4.7 --}}
         <link rel="stylesheet" href="/dist/css/font-awesome.min.css">
         <!-- Tempusdominus Bbootstrap 4 -->
-        
+
         <!-- Theme style -->
         <link rel="stylesheet" href="/dist/css/adminlte.min.css" />
         <!-- overlayScrollbars -->
@@ -30,7 +30,7 @@
             rel="stylesheet"
             href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"
         />
-        
+
         <!-- summernote -->
         <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css" />
         <!-- Google Font: Source Sans Pro -->
@@ -83,14 +83,8 @@
                 @yield('content')
                 </div>
                 <footer class="main-footer">
-                    <strong
-                        >Copyright &copy; 2014-2019
-                        <a href="http://adminlte.io">AdminLTE.io</a>.</strong
-                    >
+                    <strong>Copyright &copy; 2021</strong>
                     All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.0.5
-                    </div>
                 </footer>
                 <!-- Control Sidebar -->
                 <aside class="control-sidebar control-sidebar-dark">
@@ -100,9 +94,9 @@
             </div>
             <!-- ./wrapper -->
         @endif
-        
+
         @endguest
-        
+
 
         <!-- jQuery -->
         <script src="/plugins/jquery/jquery.min.js"></script>
@@ -114,7 +108,7 @@
         </script>
         <!-- Bootstrap 4 -->
         <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        
+
         <!-- Summernote -->
         <script src="/plugins/summernote/summernote-bs4.min.js"></script>
         <!-- overlayScrollbars -->

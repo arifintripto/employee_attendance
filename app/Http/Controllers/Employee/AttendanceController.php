@@ -14,37 +14,8 @@ use phpDocumentor\Reflection\Location;
 
 class AttendanceController extends Controller
 {
-    public function getIp(){
-        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-            if (array_key_exists($key, $_SERVER) === true){
-                foreach (explode(',', $_SERVER[$key]) as $ip){
-                    $ip = trim($ip); // just to be safe
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
-                        return $ip;
-                    }
-                }
-            }
-        }
-    }
-    public function location(Request $request) {
-        
-        $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat='.$request->lat.'&lon='.$request->lon);
-        // dd();
-        // $result = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $request->lat . ',' . $request->lon . '&key=AIzaSyC_spXZlR87VF9qq073nAhFGZ-f3K6enqk';
-        // $file_contents = file_get_contents($result);
-
-        // $json_decode = json_decode($file_contents);
-        // echo  $json_decode->results[0]->formatted_address;
-        // $response = array(
-        //     'status' => 'success',
-        //     'result' => $json_decode
-        // );
-        return $response->json()['features'][0]['properties']['display_name'];
-    }
-
-    // Opens view for attendance register form
     public function create() {
-        
+
         $employee = Auth::user()->employee;
         $data = [
             'employee' => $employee,
@@ -66,8 +37,6 @@ class AttendanceController extends Controller
     public function store(Request $request, $employee_id) {
         $attendance = new Attendance([
                 'employee_id' => $employee_id,
-                'entry_ip' => $request->ip(),
-                'entry_location' => $request->entry_location
         ]);
         $attendance->save();
         $request->session()->flash('success', 'Attendance entry successfully logged');
@@ -77,33 +46,10 @@ class AttendanceController extends Controller
     // Stores exit record of attendance
     public function update(Request $request, $attendance_id) {
         $attendance = Attendance::findOrFail($attendance_id);
-        $attendance->exit_ip = $request->ip();
-        $attendance->exit_location = $request->exit_location;
         $attendance->registered = 'yes';
         $attendance->save();
         $request->session()->flash('success', 'Attendance exit successfully logged');
         return redirect()->route('employee.attendance.create')->with('employee', Auth::user()->employee);
-    }
-
-    public function getUserIP()
-    {
-        // Get real visitor IP behind CloudFlare network
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-            $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        }
-        $client  = @$_SERVER['HTTP_CLIENT_IP'];
-        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote  = $_SERVER['REMOTE_ADDR'];
-
-        if (filter_var($client, FILTER_VALIDATE_IP)) {
-            $ip = $client;
-        } elseif (filter_var($forward, FILTER_VALIDATE_IP)) {
-            $ip = $forward;
-        } else {
-            $ip = $remote;
-        }
-        return $ip;
     }
 
     public function index() {
@@ -132,7 +78,7 @@ class AttendanceController extends Controller
                     }
                 }
                 $filter = true;
-            }   
+            }
         }
         if ($attendances)
             $attendances = $attendances->reverse()->values();

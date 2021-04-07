@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -58,12 +58,12 @@
                     <div class="card-header">
                         <div class="card-title text-center">
                             @if ($date)
-                            Employee Attendance on {{ $date }}                                
+                            Employee Attendance on {{ $date }}
                             @else
                             Employee Attendance Today
                             @endif
                         </div>
-                        
+
                     </div>
                     <div class="card-body">
                         @if ($employees->count())
@@ -76,8 +76,6 @@
                                     <th class="none">Entry Record</th>
                                     <th>Exit</th>
                                     <th class="none">Exit Record</th>
-                                    <th>Department</th>
-                                    <th>Designation</th>
                                     <th class="none">Actions</th>
                                 </tr>
                             </thead>
@@ -89,12 +87,12 @@
                                     @if($employee->attendanceToday)
                                         <td><h6 class="text-center"><span class="badge badge-pill badge-success">Recorded</span></h6></td>
                                         <td>
-                                            Recorded at {{ $employee->attendanceToday->created_at->format('H:i:s') }} from {{ $employee->attendanceToday->entry_location}} with IP {{ $employee->attendanceToday->entry_ip}}
+                                            Recorded at {{ $employee->attendanceToday->created_at->format('H:i:s') }}
                                         </td>
-                                        @if ($employee->attendanceToday->exit_ip)
+                                        @if ($employee->attendanceToday->updated_at != $employee->attendanceToday->created_at)
                                             <td><h6 class="text-center"><span class="badge badge-pill badge-success">Recorded</span></h6></td>
                                             <td>
-                                                Recorded at {{ $employee->attendanceToday->updated_at->format('H:i:s') }} from {{ $employee->attendanceToday->exit_location}} with IP {{ $employee->attendanceToday->exit_ip}}
+                                                Recorded at {{ $employee->attendanceToday->updated_at->format('H:i:s') }}
                                             </td>
                                         @else
                                             <td><h6 class="text-center"><span class="badge badge-pill badge-danger">No Record</span></h6></td>
@@ -106,16 +104,14 @@
                                         <td><h6 class="text-center"><span class="badge badge-pill badge-danger">No Record</span></h6></td>
                                         <td><h6 class="text-center"><span class="badge badge-pill badge-danger">No Record</span></h6></td>
                                     @endif
-                                    <td>{{ $employee->department }}</td>
-                                    <td>{{ $employee->desg }}</td>
                                     <td>
                                         @if($employee->attendanceToday)
-                                        <button 
+                                        <button
                                         class="btn btn-flat btn-danger"
                                         data-toggle="modal"
                                         data-target="#deleteModalCenter{{ $employee->attendanceToday->id }}"
                                         >Delete Record</button>
-                                        @else 
+                                        @else
                                         No actions available
                                         @endif
                                     </td>
@@ -134,10 +130,10 @@
                                                     <h5 style="text-align: center !important">Are you sure want to delete?</h5>
                                                 </div>
                                                 <div class="card-body text-center d-flex" style="justify-content: center">
-                                                    
+
                                                     <button type="button" class="btn flat btn-secondary" data-dismiss="modal">No</button>
-                                                    
-                                                    <form 
+
+                                                    <form
                                                     action="{{ route('admin.employees.attendance.delete', $employees->get($i-1)->attendanceToday->id) }}"
                                                     method="POST"
                                                     >
@@ -161,11 +157,11 @@
                             <h4>No Records Available</h4>
                         </div>
                         @endif
-                        
+
                     </div>
                 </div>
                 <!-- general form elements -->
-                
+
             </div>
         </div>
     </div>

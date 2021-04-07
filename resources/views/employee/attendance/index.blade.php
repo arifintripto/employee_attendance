@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -54,37 +54,14 @@
                                                 @enderror
                                             </div>
                                         </fieldset>
-                                        
-                                            <input type="submit" name="" class="btn btn-primary" value="Submit">
-                                        </div>
-                                        
+
+                                        <input type="submit" name="" class="btn btn-primary" value="Submit">
+
+
                                     </form>
                                 </div>
                             </div>
-                            {{-- <div class="container">
-                                <form action="{{ route('employee.attendance.index') }}" class="row" method="POST">
-                                    @csrf
-                                    <div class="col-sm-9 mb-2">
 
-                                        <div class="input-group">
-                                            <input type="text" name="date_range" placeholder="Start Date" class="form-control"
-                                            id="date_range"
-                                            >
-                                        </div>
-                                        @error('date_range')
-                                        <div class="ml-2 text-danger">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-3 mb-2">
-                                        <div class="input-group">
-                                            <input type="submit" name="" class="btn btn-primary" value="Submit">
-                                        </div>
-                                    </div>
-                                    
-                                </form>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -99,7 +76,7 @@
                                     of a range
                                 @endif
                             </div>
-                            
+
                         </div>
                         <div class="card-body">
                             @if ($attendances->count())
@@ -110,9 +87,7 @@
                                         <th>Date</th>
                                         <th>Status</th>
                                         <th>Entry Time</th>
-                                        <th>Entry Location</th>
                                         <th>Exit Time</th>
-                                        <th>Exit Location</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,14 +98,10 @@
                                         <td>{{ $attendance->created_at->format('d-m-Y') }}</td>
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-success">Present</span> </h5></td>
                                         <td>{{ $attendance->created_at->format('H:i:s') }}</td>
-                                        <td>{{ $attendance->entry_location }}</td>
                                         <td>{{ $attendance->updated_at->format('H:i:s') }}</td>
-                                        <td>{{ $attendance->exit_location }}</td>
                                         @elseif($attendance->registered == 'no')
                                         <td>{{ $attendance->created_at->format('d-m-Y') }}</td>
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-danger">Absent</span> </h5></td>
-                                        <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
                                         @elseif($attendance->registered == 'sun')
@@ -138,13 +109,9 @@
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-info">Sunday</span> </h5></td>
                                         <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
                                         @elseif($attendance->registered == 'leave')
                                         <td>{{ $attendance->created_at->format('d-m-Y') }}</td>
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-info">Leave</span> </h5></td>
-                                        <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
                                         @elseif($attendance->registered == 'holiday')
@@ -152,15 +119,10 @@
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-success">Holiday</span> </h5></td>
                                         <td class="text-center">No records</td>
                                         <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
-                                        <td class="text-center">No records</td>
                                         @else
                                         <td>{{ $attendance->created_at->format('d-m-Y') }}</td>
                                         <td><h5 class="text-center"><span class="badge badge-pill badge-warning">Half Day</span> </h5></td>
                                         <td>{{ $attendance->created_at->format('H:i:s') }}</td>
-                                        <td>{{ $attendance->entry_location }}</td>
-                                        <td>No entry</td>
-                                        <td>No entry</td>
                                         @endif
                                     </tr>
                                 @endforeach
@@ -171,11 +133,11 @@
                                 <h4>No Records Available</h4>
                             </div>
                             @endif
-                            
+
                         </div>
                     </div>
                     <!-- general form elements -->
-                    
+
                 </div>
             </div>
         </div>

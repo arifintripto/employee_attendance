@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
 
@@ -39,13 +39,6 @@
                     </div>
                     <div class="card-body">
                         @include('messages.alerts')
-                        <div class="row mb-3">
-                            <div class="col text-center mx-auto">
-                                <img src="/storage/employee_photos/{{ $employee->photo }}" class="rounded-circle img-fluid" alt=""
-                                style="box-shadow: 2px 4px rgba(0,0,0,0.1)"
-                                >
-                            </div>
-                        </div>
                         <table class="table profile-table table-hover">
                             <tr>
                                 <td>First Name</td>
@@ -63,7 +56,7 @@
                                 <td>Gender</td>
                                 <td>{{ $employee->sex }}</td>
                             </tr>
-                            
+
                             <tr>
                                 <td>Join Date</td>
                                 <td>{{ $employee->join_date->format('d M, Y') }}</td>
@@ -76,10 +69,7 @@
                                 <td>Department</td>
                                 <td>{{ $employee->department->name }}</td>
                             </tr>
-                            <tr>
-                                <td>Salary</td>
-                                <td>₹ {{ $employee->salary }}</td>
-                            </tr>
+
                         </table>
                     </div>
                     <div class="card-footer text-center">
@@ -88,7 +78,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <!-- /.container-fluid -->
 </section>

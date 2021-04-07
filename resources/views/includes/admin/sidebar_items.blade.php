@@ -4,7 +4,6 @@
         <p>
             Employees
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">3</span>
         </p>
     </a>
     <ul class="nav nav-treeview">
@@ -43,7 +42,6 @@
         <p>
             Authorization
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">2</span>
         </p>
     </a>
     <ul class="nav nav-treeview">
@@ -56,15 +54,6 @@
                 <p>Leaves</p>
             </a>
         </li>
-        <li class="nav-item">
-            <a
-                href="{{ route('admin.expenses.index') }}"
-                class="nav-link"
-            >
-                <i class="far fa-circle nav-icon"></i>
-                <p>Expenses</p>
-            </a>
-        </li>
     </ul>
 </li>
 <li class="nav-item has-treeview">
@@ -73,7 +62,6 @@
         <p>
             Holidays
             <i class="fas fa-angle-left right"></i>
-            <span class="badge badge-info right">2</span>
         </p>
     </a>
     <ul class="nav nav-treeview">
