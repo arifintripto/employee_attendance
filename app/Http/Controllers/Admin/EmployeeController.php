@@ -8,6 +8,7 @@ use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,4 +105,5 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($employee_id);
         return view('admin.employees.profile')->with('employee', $employee);
     }
+
 }

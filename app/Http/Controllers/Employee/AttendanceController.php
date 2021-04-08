@@ -1,16 +1,22 @@
 <?php
 
 namespace App\Http\Controllers\Employee;
+use App\Employee;
 use App\Http\Controllers\Controller;
 
 use App\Attendance;
 use App\Holiday;
 use App\Rules\DateRange;
+use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use phpDocumentor\Reflection\Location;
 
 class AttendanceController extends Controller
 {
@@ -206,6 +212,74 @@ class AttendanceController extends Controller
                 $condition2 = (intval($start->dayOfYear) <= intval($holiday->end_date->dayOfYear)) && (intval($end->dayOfYear) >= intval($holiday->end_date->dayOfYear));
             return  ($condition1 || $condition2);
         });
+    }
+
+    public function generate_attendance_pdf() {
+        $employees = User::whereNotIn('id',[1])->get();
+//        dd($employees[0]->employee->attendance[0]->created_at->toDateString());
+        $start_date = Carbon::parse('2021-04-01');
+        $period = new DatePeriod(
+            new DateTime($start_date->toDateString()),
+            new DateInterval('P1D'),
+            new DateTime($start_date->addMonth()->toDateString())
+        );
+        foreach ($period as $key => $value) {
+            $dates[] = $value->format('Y-m-d');
+        }
+
+//        dd($dates);
+//        if( ($employees[0]->employee->attendance[0]->created_at->toDateString()) == $dates[0] ) {
+//            echo "True";
+//        }
+//        else {
+//            echo "false";
+//        }
+//        foreach ($period as $key => $value) {
+//            echo $value->format('D/d/M');
+//        }
+
+//        dd($employees[0]->employee->attendance);
+
+
+//        $employee = Auth::user()->employee;
+//        $attendances = $employees->attendance;
+//        dd($employees);
+
+//        $filter = false;
+//        if(request()->all()) {
+//            $this->validate(request(), ['date_range' => new DateRange]);
+//            if($attendances) {
+//                [$start, $end] = explode(' - ', request()->input('date_range'));
+//                $start = Carbon::parse($start);
+//                $end = Carbon::parse($end)->addDay();
+//                $filtered_attendances = $this->attendanceOfRange($attendances, $start, $end);
+//                $leaves = $this->leavesOfRange($employee->leave, $start, $end);
+//                $holidays = $this->holidaysOfRange(Holiday::all(), $start, $end);
+//                $attendances = collect();
+//                $count = $filtered_attendances->count();
+//                if($count) {
+//                    $first_day = $filtered_attendances->first()->created_at->dayOfYear;
+//                    $attendances = $this->get_filtered_attendances($start, $end, $filtered_attendances, $first_day, $count, $leaves, $holidays);
+//                }
+//                else{
+//                    while($start->lessThan($end)) {
+//                        $attendances->add($this->attendanceIfNotPresent($start, $leaves, $holidays));
+//                        $start->addDay();
+//                    }
+//                }
+//                $filter = true;
+//            }
+//        }
+//        if ($attendances)
+//            $attendances = $attendances->reverse()->values();
+//        $data = [
+//            'employee' => $employee,
+//            'attendances' => $attendances,
+//            'filter' => $filter
+//        ];
+        $pdf = PDF::loadView('includes.attendance_sheet', compact('employees', 'dates'))->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Report.pdf');
     }
 
 }

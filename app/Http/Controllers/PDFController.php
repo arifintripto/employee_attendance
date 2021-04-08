@@ -11,10 +11,10 @@ class PDFController extends Controller
 //    {
 //        $this->middleware('auth');
 //    }
-    public function generatePDF()
-    {
-        $pdf = PDF::loadView('includes.attendance_sheet')->setPaper('a4', 'landscape');
-
-        return $pdf->stream('Report.pdf');
-    }
+//    public function generatePDF()
+//    {
+//        $pdf = PDF::loadView('includes.attendance_sheet')->setPaper('a4', 'landscape');
+//
+//        return $pdf->stream('Report.pdf');
+//    }
 }

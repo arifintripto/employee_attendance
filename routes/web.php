@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/pdf', 'PDFController@generatePDF');
+
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware(['auth','can:admin-access'])->group(function () {
     Route::get('/', 'AdminController@index')->name('index');
@@ -45,10 +45,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware(['auth','
     Route::put('/leaves/{leave_id}', 'LeaveController@update')->name('leaves.update');
     // Routes for leaves //
 
-    // Routes for expenses //
-    Route::get('/expenses/list-expenses', 'ExpenseController@index')->name('expenses.index');
-    Route::put('/expenses/{expense_id}', 'ExpenseController@update')->name('expenses.update');
-    // Routes for expenses //
 
     // Routes for holidays //
     Route::get('/holidays/list-holidays', 'HolidayController@index')->name('holidays.index');
@@ -73,9 +69,9 @@ Route::namespace('Employee')->prefix('employee')->name('employee.')->middleware(
     Route::post('/attendance/{employee_id}', 'AttendanceController@store')->name('attendance.store');
     Route::put('/attendance/{attendance_id}', 'AttendanceController@update')->name('attendance.update');
     // Routes for Attendances //
-    /*
-    *
-    */
+
+    Route::get('/pdf', 'AttendanceController@generate_attendance_pdf');
+
     // Routes for Leaves //
     Route::get('/leaves/apply', 'LeaveController@create')->name('leaves.create');
     Route::get('/leaves/list-leaves', 'LeaveController@index')->name('leaves.index');
@@ -85,14 +81,6 @@ Route::namespace('Employee')->prefix('employee')->name('employee.')->middleware(
     Route::delete('/leaves/{leave_id}', 'LeaveController@destroy')->name('leaves.delete');
     // Routes for Leaves //
 
-    // Routes for Expenses//
-    Route::get('/expenses/list-expenses', 'ExpenseController@index')->name('expenses.index');
-    Route::get('/expenses/claim-expense', 'ExpenseController@create')->name('expenses.create');
-    Route::post('/expenses/{employee_id}', 'ExpenseController@store')->name('expenses.store');
-    Route::get('/expenses/edit-expense/{expense_id}', 'ExpenseController@edit')->name('expenses.edit');
-    Route::put('/expenses/{expense_id}', 'ExpenseController@update')->name('expenses.update');
-    Route::delete('/expenses/{expense_id}', 'ExpenseController@destroy')->name('expenses.delete');
-    // Routes for Expenses//
 
     // Routes for Self //
     Route::get('/self/holidays', 'SelfController@holidays')->name('self.holidays');
