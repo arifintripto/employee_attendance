@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "stevebauman/location": "^5.1",
-        "ext-calendar": "*"
+        "ext-calendar": "*",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

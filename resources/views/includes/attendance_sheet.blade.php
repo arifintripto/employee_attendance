@@ -70,7 +70,7 @@
         <th style="width: 6%" class="gray-bg">Area/Territory</th>
         <th style="width: 5%" class="gray-bg">Designation</th>
         <th style="width: 5.5%" class="gray-bg">Mob No</th>
-        @foreach ($dates as $key => $date)
+        @foreach ($dates as $date)
             <th style="width: 2%" class="dates rotate_table_th_text"><div>{{ date('D-d-M',strtotime($date)) }}</div></th>
         @endforeach
         <th style="width: 2%">P</th>
@@ -79,36 +79,46 @@
         <th style="width: 2%">WFH</th>
         <th style="width: 3%"><div>Total Working Day</div></th>
     </tr>
-    @foreach($employees as $index => $employee)
+    @foreach($users as $user)
         <tr>
-            <td style="text-align: left">{{ $employee->employee->first_name }} {{ $employee->employee->last_name }}</td>
+            <td style="text-align: left">{{ $user->employee->first_name }} {{ $user->employee->last_name }}</td>
             <td style="text-align: left">Developer</td>
             <td>Executive MIS(SFA)</td>
             <td style="text-align: left">01913223368</td>
-            @foreach($employee->employee->attendance as $index => $attendance)
-                @foreach($dates as $key => $date)
-                    @if($attendance)
-                        @if(($attendance->created_at->toDateString()) == (date('Y-m-d',strtotime($date))))
-                            @if ($attendance->registered == 'yes')
-                                <td>P</td>
-                            @elseif($attendance->registered == 'no')
-                                <td>A</td>
-                            @elseif($attendance->registered == 'sun')
-                                <td>DO</td>
-                            @elseif($attendance->registered == 'leave')
-                                <td>L</td>
-                            @elseif($attendance->registered == 'holiday')
-                                <td>GH</td>
-                            @endif
-                        @else
-                            <td>{{ date('Y-m-d',strtotime($date)) }}</td>
-                        @endif
-                    @else
-                        <td>L</td>
-                    @endif
+            @php
+                $datex = $dates
+            @endphp
+                @forelse($user->employee->attendance as $attendance)
 
-                @endforeach
-            @endforeach
+                    @foreach($datex as $key => $date)
+                            @if( $attendance->created_at->toDateString() == date('Y-m-d',strtotime($date)) )
+                                @if ($attendance->registered == 'yes')
+                                    <td>P</td>
+                                    @php goto end; @endphp
+                                @elseif($attendance->registered == 'sun')
+                                    <td>DO</td>
+                                    @php goto end; @endphp
+                                @elseif($attendance->registered == 'leave')
+                                    <td>L</td>
+                                    @php goto end; @endphp
+                                @elseif($attendance->registered == 'holiday')
+                                    <td>GH</td>
+                                    @php goto end; @endphp
+                                @endif
+                            @else
+                                <td>{{ date('Y-m-d',strtotime($date)) }}</td>
+                            @endif
+                    @endforeach
+                @empty
+                    @foreach($dates as $date)
+                        <td>AA</td>
+                    @endforeach
+
+                    @php end: array_slice($datex, $key) @endphp
+                    @continue
+                @endforelse
+
+
             <td>9</td>
             <td>1</td>
             <td>4</td>

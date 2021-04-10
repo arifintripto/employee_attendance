@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use function MongoDB\BSON\toJSON;
 
 class AttendanceController extends Controller
 {
@@ -215,8 +216,7 @@ class AttendanceController extends Controller
     }
 
     public function generate_attendance_pdf() {
-        $employees = User::whereNotIn('id',[1])->get();
-//        dd($employees[0]->employee->attendance[0]->created_at->toDateString());
+        $users = User::whereNotIn('id',[1])->get();
         $start_date = Carbon::parse('2021-04-01');
         $period = new DatePeriod(
             new DateTime($start_date->toDateString()),
@@ -226,6 +226,8 @@ class AttendanceController extends Controller
         foreach ($period as $key => $value) {
             $dates[] = $value->format('Y-m-d');
         }
+
+
 
 //        dd($dates);
 //        if( ($employees[0]->employee->attendance[0]->created_at->toDateString()) == $dates[0] ) {
@@ -277,7 +279,8 @@ class AttendanceController extends Controller
 //            'attendances' => $attendances,
 //            'filter' => $filter
 //        ];
-        $pdf = PDF::loadView('includes.attendance_sheet', compact('employees', 'dates'))->setPaper('a4', 'landscape');
+
+        $pdf = PDF::loadView('includes.attendance_sheet', compact('users', 'dates'))->setPaper('a4', 'landscape');
 
         return $pdf->stream('Report.pdf');
     }
