@@ -1,4 +1,4 @@
-@extends('layouts.app')        
+@extends('layouts.app')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -51,8 +51,6 @@
                                         <th>#</th>
                                         <th>Applied on</th>
                                         <th>Name</th>
-                                        <th>Department</th>
-                                        <th>Designation</th>
                                         <th>Reason</th>
                                         <th>Status</th>
                                         <th class="none">Half Day</th>
@@ -68,12 +66,10 @@
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $leave->created_at->format('d-m-Y') }}</td>
                                         <td>{{ $leave->employee->first_name.' '.$leave->employee->last_name }}</td>
-                                        <td>{{ $leave->employee->department }}</td>
-                                        <td>{{ $leave->employee->desg }}</td>
                                         <td>{{ $leave->reason }}</td>
                                         <td>
                                             <h5>
-                                                <span 
+                                                <span
                                                 @if ($leave->status == 'pending')
                                                     class="badge badge-pill badge-warning"
                                                 @elseif($leave->status == 'declined')
@@ -83,19 +79,19 @@
                                                 @endif
                                                 >
                                                     {{ ucfirst($leave->status) }}
-                                                </span> 
+                                                </span>
                                             </h5>
                                         </td>
                                         <td>{{ ucfirst($leave->half_day) }}</td>
                                         <td>{{ $leave->start_date->format('d-m-Y')}}</td>
-                                        @if($leave->end_date) 
+                                        @if($leave->end_date)
                                         <td>{{ $leave->end_date->format('d-m-Y') }}</td>
                                         @else
                                         <td>Single Day</td>
                                         @endif
                                         <td>{{ $leave->description }}</td>
                                         <td>
-                                            <button 
+                                            <button
                                             class="btn btn-flat btn-info"
                                             data-toggle="modal"
                                             data-target="#deleteModalCenter{{ $index + 1 }}"
@@ -116,7 +112,7 @@
                                                 <div class="card-header">
                                                     <h5 style="text-align: center !important">Update Leave Status</h5>
                                                 </div>
-                                                <form 
+                                                <form
                                                     action="{{ route('admin.leaves.update', $leaves->get($i-1)->id) }}"
                                                     method="POST"
                                                 >
@@ -132,7 +128,7 @@
                                                                 <option value="declined">Decline</option>
                                                             </select>
                                                         </div>
-                                                        
+
                                                 </div>
                                                 <div class="card-footer text-center">
                                                     <button type="submit" class="btn flat btn-info">Update</button>

@@ -39,6 +39,12 @@
         .holiday, .gray-bg {
             background: #ccc;
         }
+        .green-bg {
+            background: #6bbd6b;
+        }
+        .red-bg {
+            background: #ffaaaa;
+        }
         .nowrap {
             white-space: nowrap;
         }
@@ -71,7 +77,7 @@
         <th style="width: 5%" class="gray-bg">Designation</th>
         <th style="width: 5.5%" class="gray-bg">Mob No</th>
         @foreach ($dates as $date)
-            <th style="width: 2%" class="dates rotate_table_th_text"><div>{{ date('D-d-M',strtotime($date)) }}</div></th>
+            <th style="width: 2%" class="dates rotate_table_th_text @if(date('D',strtotime($date)) === 'Fri') gray-bg @endif"><div>{{ date('D-d-M',strtotime($date)) }}</div></th>
         @endforeach
         <th style="width: 2%">P</th>
         <th style="width: 2%">L</th>
@@ -80,59 +86,50 @@
         <th style="width: 3%"><div>Total Working Day</div></th>
     </tr>
     @foreach($users as $user)
+        @php $datex = $dates @endphp
         <tr>
             <td style="text-align: left">{{ $user->employee->first_name }} {{ $user->employee->last_name }}</td>
             <td style="text-align: left">Developer</td>
             <td>Executive MIS(SFA)</td>
             <td style="text-align: left">01913223368</td>
-            @php
-                $datex = $dates
-            @endphp
 
+            @foreach($datex as $key => $date)
 
                 @forelse($user->employee->attendance as $attendance)
 
+                    @if( $attendance->created_at->toDateString() == date('Y-m-d',strtotime($date)) )
 
 
-                    @foreach($datex as $key => $date)
-
-
-
-                        @if( $attendance->created_at->toDateString() == date('Y-m-d',strtotime($date)) )
-                            @php $datex = array_slice($datex, $key+1) @endphp
-
-                            @if ($attendance->registered == 'yes')
-                                <td>P</td>
-                                @php goto end; @endphp
-                            @elseif($attendance->registered == 'sun')
-                                <td>DO</td>
-                                @php goto end; @endphp
-                            @elseif($attendance->registered == 'leave')
-                                <td>L</td>
-                                @php goto end; @endphp
-                            @elseif($attendance->registered == 'holiday')
-                                <td>GH</td>
-                                @php goto end; @endphp
-                            @endif
-
-
-                        @else
-                            <td>{{ date('Y-m-d',strtotime($date)) }}</td>
+                        @if ($attendance->registered == 'yes')
+                            <td class="green-bg">P</td>
+                            @php goto point89; @endphp
+                        @elseif($attendance->registered == 'leave')
+                            <td>L</td>
+                            @php goto point89; @endphp
+                        @elseif($attendance->registered == 'holiday')
+                            <td>GH</td>
+                            @php goto point89; @endphp
                         @endif
-
-
-                    @endforeach
-
-
-
+                    @else
+                        @continue
+                    @endif
                 @empty
-
-                    @foreach($datex as $date)
-                        <td>{{ date('Y-m-d',strtotime($date)) }}</td>
-                    @endforeach
-
+                    @if(date('D',strtotime($date)) === 'Fri')
+                        <td class="gray-bg">DO</td>
+                        @php goto point89; @endphp
+                    @endif
+                    <td class="red-bg">AA</td>
+                    @continue
 
                 @endforelse
+                    @if(date('D',strtotime($date)) === 'Fri')
+                        <td class="gray-bg">DO</td>
+                        @php goto point89; @endphp
+                    @endif
+                    <td class="red-bg">A</td>
+                    @php point89: @endphp
+            @endforeach
+
 
 
             <td>9</td>
@@ -141,10 +138,9 @@
             <td>11</td>
             <td><div>25</div></td>
         </tr>
+
     @endforeach
 </table>
-
-
 
 
 </body>

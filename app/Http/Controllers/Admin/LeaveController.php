@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Department;
 use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Leave;
@@ -14,7 +13,6 @@ class LeaveController extends Controller
         $leaves = Leave::all();
         $leaves = $leaves->map(function($leave, $key) {
             $employee = Employee::find($leave->employee_id);
-            $employee->department = Department::find($employee->department_id)->name;
             $leave->employee = $employee;
             return $leave;
         });
@@ -29,7 +27,7 @@ class LeaveController extends Controller
         $leave->status = $request->status;
         $leave->save();
         $request->session()->flash('success', 'Leave status has been successfully updated');
-        
+
         return back();
     }
 }
