@@ -88,34 +88,50 @@
             @php
                 $datex = $dates
             @endphp
+
+
                 @forelse($user->employee->attendance as $attendance)
 
+
+
                     @foreach($datex as $key => $date)
-                            @if( $attendance->created_at->toDateString() == date('Y-m-d',strtotime($date)) )
-                                @if ($attendance->registered == 'yes')
-                                    <td>P</td>
-                                    @php goto end; @endphp
-                                @elseif($attendance->registered == 'sun')
-                                    <td>DO</td>
-                                    @php goto end; @endphp
-                                @elseif($attendance->registered == 'leave')
-                                    <td>L</td>
-                                    @php goto end; @endphp
-                                @elseif($attendance->registered == 'holiday')
-                                    <td>GH</td>
-                                    @php goto end; @endphp
-                                @endif
-                            @else
-                                <td>{{ date('Y-m-d',strtotime($date)) }}</td>
+
+
+
+                        @if( $attendance->created_at->toDateString() == date('Y-m-d',strtotime($date)) )
+                            @php $datex = array_slice($datex, $key+1) @endphp
+
+                            @if ($attendance->registered == 'yes')
+                                <td>P</td>
+                                @php goto end; @endphp
+                            @elseif($attendance->registered == 'sun')
+                                <td>DO</td>
+                                @php goto end; @endphp
+                            @elseif($attendance->registered == 'leave')
+                                <td>L</td>
+                                @php goto end; @endphp
+                            @elseif($attendance->registered == 'holiday')
+                                <td>GH</td>
+                                @php goto end; @endphp
                             @endif
-                    @endforeach
-                @empty
-                    @foreach($dates as $date)
-                        <td>AA</td>
+
+
+                        @else
+                            <td>{{ date('Y-m-d',strtotime($date)) }}</td>
+                        @endif
+
+
                     @endforeach
 
-                    @php end: array_slice($datex, $key) @endphp
-                    @continue
+
+
+                @empty
+
+                    @foreach($datex as $date)
+                        <td>{{ date('Y-m-d',strtotime($date)) }}</td>
+                    @endforeach
+
+
                 @endforelse
 
 
